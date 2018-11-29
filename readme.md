@@ -26,16 +26,16 @@ Example:
 }
 ```
 
-The data file above (located in `./data) will result in the following URLs:
+The data file above (located in `./data`) will result in the following URLs:
 ```
 http://queue.local/123/foo
 http://queue.local/456/bar
 http://queue.local/789/baz
 ```
-The base URL is configurable in ./src/Environment.js`
+The base URL is configurable in `./src/Environment.js`
 You can also provide a data file and base URL for production and development separately.
 
-### Requirements for the backend
+### Requirements for the backend`
 The Backend should return one of the following states:
 ```
 info
