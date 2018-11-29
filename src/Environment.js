@@ -12,7 +12,7 @@ const URL_PRODUCTION = 'http://queue.production/%id%/%name%';
 export class Environment
 {
     /**
-     * @param environment
+     * @param {Environment} environment
      */
     constructor(environment)
     {

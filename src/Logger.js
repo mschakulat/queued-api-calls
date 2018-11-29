@@ -10,6 +10,9 @@ export const LOG_FORMAT_DEFAULT = 'default';
 
 export class Logger
 {
+    /**
+     * @param {string} baseDir
+     */
     constructor(baseDir)
     {
         const {combine, timestamp, printf} = format;
@@ -48,6 +51,10 @@ export class Logger
         });
     }
 
+    /**
+     * @param {string} logFormat
+     * @returns {Logger}
+     */
     get(logFormat)
     {
         if (LOG_FORMAT_DEFAULT === logFormat) {

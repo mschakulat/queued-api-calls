@@ -15,9 +15,9 @@ const BEARER = '[my-auth-token]';
 export class Queue
 {
     /**
-     * @param concurrent
-     * @param logger
-     * @param environment
+     * @param {number} concurrent
+     * @param {Logger} logger
+     * @param {Environment} environment
      */
     constructor(concurrent, logger, environment)
     {
@@ -55,6 +55,9 @@ export class Queue
         };
     }
 
+    /**
+     * @param {object} params
+     */
     addParams(params)
     {
         let baseUrl = this.environment.getBaseUrl();
