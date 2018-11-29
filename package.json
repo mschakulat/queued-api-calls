@@ -1,5 +1,6 @@
 {
     "name": "queued-api-calls",
+    "description": "This application runs concurrent API requests",
     "author": "Michael Schakulat <mschakulat@fetchit.de>",
     "version": "0.9.0",
     "license": "MIT",
