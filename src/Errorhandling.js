@@ -8,5 +8,5 @@ process.on('unhandledRejection', (reason) => {
 });
 
 process.on('uncaughtException', (err) => {
-    console.log(err);
+    console.error(err);
 });
