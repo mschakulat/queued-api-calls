@@ -3,8 +3,7 @@
  * @copyright by Michael Schakulat
  */
 
-import * as winston from 'winston';
-import { createLogger, format } from 'winston';
+import { createLogger, format, transports } from 'winston';
 
 export const LOG_FORMAT_JSON = 'json';
 export const LOG_FORMAT_DEFAULT = 'default';
@@ -13,32 +12,38 @@ export class Logger
 {
     constructor(baseDir)
     {
-        const { combine, timestamp, printf } = format;
+        const {combine, timestamp, printf} = format;
         const myFormat = printf(info => {
             return `${info.timestamp} ${info.level}: ${info.message}`;
         });
         this.defaultLogger = createLogger({
             format: combine(
-                winston.format.colorize(),
                 timestamp(),
                 myFormat
             ),
             transports: [
-                new winston.transports.Console({level: 'debug'}),
-                new winston.transports.File({filename: `${baseDir}/combined.log`, level: 'debug'}),
-                new winston.transports.File({filename: `${baseDir}/info.log`, level: 'info'}),
-                new winston.transports.File({filename: `${baseDir}/error.log`, level: 'error'}),
+                new transports.Console({
+                    level: 'debug',
+                    format: combine(
+                        format.colorize(),
+                        timestamp(),
+                        myFormat
+                    )
+                }),
+                new transports.File({filename: `${baseDir}/combined.log`, level: 'debug'}),
+                new transports.File({filename: `${baseDir}/info.log`, level: 'info'}),
+                new transports.File({filename: `${baseDir}/error.log`, level: 'error'}),
             ]
         });
 
         this.jsonLogger = createLogger({
-            format: winston.format.combine(
-                winston.format.colorize(),
-                winston.format.json(),
+            format: combine(
+                format.colorize(),
+                format.json(),
             ),
             transports: [
-                new winston.transports.Console({level: 'debug'}),
-                new winston.transports.File({filename: `${baseDir}/data.log`, level: 'debug'}),
+                new transports.Console({level: 'debug'}),
+                new transports.File({filename: `${baseDir}/data.log`, level: 'debug'}),
             ]
         });
     }

@@ -19,6 +19,6 @@ const params = require(join(baseDir, 'data', environment.getDataFile())).params;
 const logger = new Logger(join(baseDir, 'logs'));
 const queue = new Queue(concurrent, logger, environment);
 
-params.forEach((customer) => {
-    queue.addParams(customer.id, customer.name);
+params.forEach((item) => {
+    queue.addParams(item);
 });

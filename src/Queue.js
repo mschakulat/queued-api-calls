@@ -51,21 +51,21 @@ export class Queue
         }), concurrent);
 
         this.queue.drain = () => {
-            this.logger.info('Item processed');
+            this.logger.info('Items processed');
         };
     }
 
-    addParams(...params)
+    addParams(params)
     {
-        const baseUrl = this.environment.getBaseUrl();
-        if (params.length) {
+        let baseUrl = this.environment.getBaseUrl();
+        if (params) {
             for (const param in params) {
                 if (params.hasOwnProperty(param)) {
-                    baseUrl.replace(`%${param}%`, params[ param ]);
+                    baseUrl = baseUrl.replace(`%${param}%`, params[ param ]);
                 }
             }
         }
-        this.logger.verbose(`Adding item to queue: ${JSON.stringify(params)}`);
+        this.logger.verbose(`Adding item to queue: ${JSON.stringify(params)} [${baseUrl}]`);
         this.queue.push(baseUrl, (err) => {
             if (err) {
                 this.logger.error(err.message);
